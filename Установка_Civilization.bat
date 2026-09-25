@@ -95,31 +95,50 @@ try {
     }
 
     Write-Host ""
-    Write-Host "[*] Поиск папки Minecraft..." -ForegroundColor Cyan
-
-    $mcCandidates = @(
-        (Join-Path $env:APPDATA ".minecraft"),
-        "E:\Games\.minecraft",
-        "D:\Games\.minecraft",
-        "C:\Games\.minecraft",
-        "D:\.minecraft",
-        "E:\.minecraft"
-    )
+    Write-Host "[*] Поиск активной папки Minecraft..." -ForegroundColor Cyan
 
     $detectedMc = $null
-    foreach ($cand in $mcCandidates) {
-        if (Test-Path $cand) {
-            $detectedMc = $cand
-            break
+
+    # 1. Проверяем настройки TLauncher (самый точный способ для TLauncher пользователей)
+    $tlProps = Join-Path $env:APPDATA ".tlauncher\tlauncher-2.0.properties"
+    if (Test-Path $tlProps) {
+        $lines = Get-Content $tlProps -Encoding utf8
+        foreach ($l in $lines) {
+            if ($l -match "^minecraft\.gamedir=(.+)$") {
+                $raw = $matches[1].Replace("\:", ":").Replace("\\", "\").Trim()
+                if (Test-Path $raw) {
+                    $detectedMc = $raw
+                    Write-Host "[+] Найдена папка Minecraft из настроек TLauncher!" -ForegroundColor Green
+                    break
+                }
+            }
+        }
+    }
+
+    # 2. Если TLauncher не указал путь, проверяем стандартные папки
+    if (-not $detectedMc) {
+        $candidates = @(
+            "E:\Games\.minecraft",
+            "D:\Games\.minecraft",
+            "C:\Games\.minecraft",
+            (Join-Path $env:APPDATA ".minecraft"),
+            "D:\.minecraft",
+            "E:\.minecraft"
+        )
+        foreach ($c in $candidates) {
+            if (Test-Path $c) {
+                $detectedMc = $c
+                break
+            }
         }
     }
 
     if ($detectedMc) {
-        Write-Host "[+] Найдена папка Minecraft: " -NoNewline -ForegroundColor Green
+        Write-Host "[+] Папка Minecraft: " -NoNewline -ForegroundColor Green
         Write-Host "$detectedMc" -ForegroundColor White
         Write-Host ""
         Write-Host "Нажмите ENTER для установки в эту папку," -ForegroundColor Yellow
-        Write-Host "или введите другой путь к .minecraft:" -ForegroundColor Yellow
+        Write-Host "или введите другой путь вручную:" -ForegroundColor Yellow
         $userMc = Read-Host "Путь (или ENTER)"
         if ([string]::IsNullOrWhiteSpace($userMc)) {
             $mcDir = $detectedMc
@@ -145,12 +164,12 @@ try {
 
     Write-Host ""
     Write-Host "==================================================================" -ForegroundColor Cyan
-    Write-Host "Начинаем установку независимой версии в: $mcDir" -ForegroundColor Cyan
+    Write-Host "Установка изолированной сборки Civilization в: $mcDir" -ForegroundColor Cyan
     Write-Host "==================================================================" -ForegroundColor Cyan
     Write-Host ""
 
     # 1. Библиотеки Forge
-    Write-Host "[1/2] Установка библиотек Forge в .minecraft/libraries..." -ForegroundColor Yellow
+    Write-Host "[1/2] Установка библиотек Forge (134 файла) в .minecraft/libraries..." -ForegroundColor Yellow
     $libSrc = Join-Path $sourceDir "libraries"
     $libDst = Join-Path $mcDir "libraries"
     if (Test-Path $libSrc) {
@@ -158,10 +177,13 @@ try {
         Copy-Item -Recurse -Force (Join-Path $libSrc "*") $libDst
     }
 
-    # 2. Изолированная папка версии versions/Civilization
-    Write-Host "[2/2] Установка изолированной версии в .minecraft/versions/Civilization..." -ForegroundColor Yellow
-    Write-Host "      (Все моды, ресурспаки, шейдеры и конфиги устанавливаются сюда" -ForegroundColor Gray
-    Write-Host "       и не будут смешиваться с другими версиями!)" -ForegroundColor Gray
+    # 2. Изолированная версия Civilization
+    Write-Host "[2/2] Установка версии в .minecraft/versions/Civilization..." -ForegroundColor Yellow
+    Write-Host "      - Все 13 модов (playertrading, simplemenu, OptiFine, Xaeros)" -ForegroundColor Gray
+    Write-Host "      - Ресурспаки и артефакты (Звездный оберег, Кровавый топор, Поступь тени)" -ForegroundColor Gray
+    Write-Host "      - Шейдерпаки" -ForegroundColor Gray
+    Write-Host "      - Меню SimpleMenu (фоны, логотипы, иконки)" -ForegroundColor Gray
+    Write-Host "      - Список серверов (servers.dat с сервером Civilization)" -ForegroundColor Gray
     $civSrc = Join-Path $sourceDir "versions\Civilization"
     $civDst = Join-Path $mcDir "versions\Civilization"
     if (-not (Test-Path $civDst)) { New-Item -ItemType Directory -Path $civDst -Force | Out-Null }
@@ -200,8 +222,7 @@ try {
     Write-Host "               УСТАНОВКА УСПЕШНО ЗАВЕРШЕНА!                       " -ForegroundColor Green
     Write-Host "==================================================================" -ForegroundColor Green
     Write-Host ""
-    Write-Host "Все файлы установлены изолированно в:" -ForegroundColor Cyan
-    Write-Host "$civDst" -ForegroundColor White
+    Write-Host "Папка сборки: $civDst" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "Что делать дальше:" -ForegroundColor Cyan
     Write-Host "1. Откройте лаунчер (TLauncher, Legacy, Minecraft Launcher)." -ForegroundColor White
