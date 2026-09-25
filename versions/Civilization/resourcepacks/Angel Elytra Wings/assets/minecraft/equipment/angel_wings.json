@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "wings": [
+      {
+        "texture": "minecraft:angel_wings",
+        "use_player_texture": false
+      }
+    ]
+  }
+}

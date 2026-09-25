@@ -1,0 +1,7 @@
+{
+  "pack": {
+    "pack_format": 15,
+    "supported_formats": [15, 255],
+    "description": "Ангельские крылья Деда Пашки (OptiFine CIT)\nРаботает только для реликвии Деда Пашки!"
+  }
+}

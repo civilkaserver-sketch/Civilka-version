@@ -29,12 +29,12 @@ try {
     $sourceDir = $null
 
     # 1. Проверяем локальные файлы
-    if (Test-Path (Join-Path $scriptDir "versions\1.21.8-forge-58.1.7")) {
+    if (Test-Path (Join-Path $scriptDir "versions\Civilization\Civilization.json")) {
         $sourceDir = $scriptDir
         Write-Host "[+] Локальные файлы сборки найдены." -ForegroundColor Green
-    } elseif (Test-Path "$env:TEMP\Civilka-version\versions\1.21.8-forge-58.1.7") {
+    } elseif (Test-Path "$env:TEMP\Civilka-version\versions\Civilization\Civilization.json") {
         $sourceDir = "$env:TEMP\Civilka-version"
-        Write-Host "[+] Найдена ранее загруженная сборка в кэше: $sourceDir" -ForegroundColor Green
+        Write-Host "[+] Найдена сборка в кэше: $sourceDir" -ForegroundColor Green
     } else {
         Write-Host "[i] Локальные файлы сборки не найдены рядом со скриптом." -ForegroundColor Cyan
         Write-Host "[i] Начинается загрузка актуальной сборки с GitHub..." -ForegroundColor Cyan
@@ -50,7 +50,7 @@ try {
         if ($gitCmd) {
             Write-Host "[*] Клонирование сборки через Git (--depth 1)..." -ForegroundColor Yellow
             $cloneRes = Start-Process -FilePath "git" -ArgumentList "clone --depth 1 https://github.com/civilkaserver-sketch/Civilka-version.git `"$targetWork`"" -NoNewWindow -Wait -PassThru
-            if ($cloneRes.ExitCode -eq 0 -and (Test-Path (Join-Path $targetWork "versions\1.21.8-forge-58.1.7"))) {
+            if ($cloneRes.ExitCode -eq 0 -and (Test-Path (Join-Path $targetWork "versions\Civilization\Civilization.json"))) {
                 $sourceDir = $targetWork
                 $downloaded = $true
                 Write-Host "[+] Сборка успешно загружена через Git!" -ForegroundColor Green
@@ -81,7 +81,7 @@ try {
                 Remove-Item -Force $zipPath -ErrorAction SilentlyContinue
                 
                 $unpacked = Join-Path $extPath "Civilka-version-main"
-                if (Test-Path (Join-Path $unpacked "versions\1.21.8-forge-58.1.7")) {
+                if (Test-Path (Join-Path $unpacked "versions\Civilization\Civilization.json")) {
                     $sourceDir = $unpacked
                     $downloaded = $true
                     Write-Host "[+] Сборка успешно распакована!" -ForegroundColor Green
@@ -90,7 +90,7 @@ try {
         }
 
         if (-not $downloaded) {
-            throw "Не удалось загрузить файлы сборки с GitHub! Проверьте подключение к интернету."
+            throw "Не удалось загрузить файлы сборки с GitHub! Проверьте интернет."
         }
     }
 
@@ -145,19 +145,12 @@ try {
 
     Write-Host ""
     Write-Host "==================================================================" -ForegroundColor Cyan
-    Write-Host "Начинаем установку файлов в: $mcDir" -ForegroundColor Cyan
+    Write-Host "Начинаем установку независимой версии в: $mcDir" -ForegroundColor Cyan
     Write-Host "==================================================================" -ForegroundColor Cyan
     Write-Host ""
 
-    # Копирование версии
-    Write-Host "[1/6] Установка версии Forge 1.21.8..." -ForegroundColor Yellow
-    $vSrc = Join-Path $sourceDir "versions\1.21.8-forge-58.1.7"
-    $vDst = Join-Path $mcDir "versions\1.21.8-forge-58.1.7"
-    if (-not (Test-Path $vDst)) { New-Item -ItemType Directory -Path $vDst -Force | Out-Null }
-    Copy-Item -Recurse -Force (Join-Path $vSrc "*") $vDst
-
-    # Копирование библиотек
-    Write-Host "[2/6] Установка библиотек Forge (134 файла)..." -ForegroundColor Yellow
+    # 1. Библиотеки Forge
+    Write-Host "[1/2] Установка библиотек Forge в .minecraft/libraries..." -ForegroundColor Yellow
     $libSrc = Join-Path $sourceDir "libraries"
     $libDst = Join-Path $mcDir "libraries"
     if (Test-Path $libSrc) {
@@ -165,78 +158,40 @@ try {
         Copy-Item -Recurse -Force (Join-Path $libSrc "*") $libDst
     }
 
-    # Копирование модов
-    Write-Host "[3/6] Установка модов (playertrading, OptiFine, Xaeros, etc.)..." -ForegroundColor Yellow
-    $modSrc = Join-Path $sourceDir "mods"
-    $modDst = Join-Path $mcDir "mods"
-    if (Test-Path $modSrc) {
-        if (-not (Test-Path $modDst)) { New-Item -ItemType Directory -Path $modDst -Force | Out-Null }
-        Copy-Item -Recurse -Force (Join-Path $modSrc "*") $modDst
-    }
+    # 2. Изолированная папка версии versions/Civilization
+    Write-Host "[2/2] Установка изолированной версии в .minecraft/versions/Civilization..." -ForegroundColor Yellow
+    Write-Host "      (Все моды, ресурспаки, шейдеры и конфиги устанавливаются сюда" -ForegroundColor Gray
+    Write-Host "       и не будут смешиваться с другими версиями!)" -ForegroundColor Gray
+    $civSrc = Join-Path $sourceDir "versions\Civilization"
+    $civDst = Join-Path $mcDir "versions\Civilization"
+    if (-not (Test-Path $civDst)) { New-Item -ItemType Directory -Path $civDst -Force | Out-Null }
+    Copy-Item -Recurse -Force (Join-Path $civSrc "*") $civDst
 
-    # Копирование ресурспаков
-    Write-Host "[4/6] Установка ресурспаков и артефактов..." -ForegroundColor Yellow
-    $rpSrc = Join-Path $sourceDir "resourcepacks"
-    $rpDst = Join-Path $mcDir "resourcepacks"
-    if (Test-Path $rpSrc) {
-        if (-not (Test-Path $rpDst)) { New-Item -ItemType Directory -Path $rpDst -Force | Out-Null }
-        Copy-Item -Recurse -Force (Join-Path $rpSrc "*") $rpDst
-    }
-
-    # Копирование шейдеров
-    Write-Host "[5/6] Установка шейдерпаков..." -ForegroundColor Yellow
-    $spSrc = Join-Path $sourceDir "shaderpacks"
-    $spDst = Join-Path $mcDir "shaderpacks"
-    if (Test-Path $spSrc) {
-        if (-not (Test-Path $spDst)) { New-Item -ItemType Directory -Path $spDst -Force | Out-Null }
-        Copy-Item -Recurse -Force (Join-Path $spSrc "*") $spDst
-    }
-
-    # Копирование конфигов и настроек
-    Write-Host "[6/6] Настройка конфигурации, шейдеров и списка серверов..." -ForegroundColor Yellow
-    $cfgSrc = Join-Path $sourceDir "config"
-    $cfgDst = Join-Path $mcDir "config"
-    if (Test-Path $cfgSrc) {
-        if (-not (Test-Path $cfgDst)) { New-Item -ItemType Directory -Path $cfgDst -Force | Out-Null }
-        Copy-Item -Recurse -Force (Join-Path $cfgSrc "*") $cfgDst
-    }
-
-    foreach ($optFile in @("optionsof.txt", "optionsshaders.txt")) {
-        $srcFile = Join-Path $sourceDir $optFile
-        if (Test-Path $srcFile) {
-            Copy-Item -Force $srcFile (Join-Path $mcDir $optFile)
-        }
-    }
-
-    $srvFile = Join-Path $sourceDir "servers.dat"
-    if (Test-Path $srvFile) {
-        $srvDst = Join-Path $mcDir "servers.dat"
-        if (-not (Test-Path $srvDst)) {
-            Copy-Item -Force $srvFile $srvDst
-        }
-    }
-
-    # Добавление профиля в launcher_profiles.json
-    $lpPath = Join-Path $mcDir "launcher_profiles.json"
-    if (Test-Path $lpPath) {
-        try {
-            $json = Get-Content $lpPath -Raw -Encoding utf8 | ConvertFrom-Json
-            if (-not $json.profiles) {
-                $json | Add-Member -MemberType NoteProperty -Name "profiles" -Value ([PSCustomObject]@{})
+    # Регистрация профиля в launcher_profiles.json и TlauncherProfiles.json
+    $profileConfigs = @("launcher_profiles.json", "TlauncherProfiles.json")
+    foreach ($pCfg in $profileConfigs) {
+        $lpPath = Join-Path $mcDir $pCfg
+        if (Test-Path $lpPath) {
+            try {
+                $json = Get-Content $lpPath -Raw -Encoding utf8 | ConvertFrom-Json
+                if (-not $json.profiles) {
+                    $json | Add-Member -MemberType NoteProperty -Name "profiles" -Value ([PSCustomObject]@{})
+                }
+                $civ = [PSCustomObject]@{
+                    created = (Get-Date -Format "yyyy-MM-ddTHH:mm:ss.fffZ")
+                    icon = "Furnace"
+                    lastUsed = (Get-Date -Format "yyyy-MM-ddTHH:mm:ss.fffZ")
+                    lastVersionId = "Civilization"
+                    name = "Civilization"
+                    type = "custom"
+                    gameDir = $civDst
+                }
+                $json.profiles | Add-Member -MemberType NoteProperty -Name "Civilization" -Value $civ -Force
+                $json | ConvertTo-Json -Depth 10 | Set-Content $lpPath -Encoding utf8
+                Write-Host "[+] Профиль 'Civilization' зарегистрирован в $pCfg" -ForegroundColor Green
+            } catch {
+                Write-Host "[!] Заметка: не удалось обновить $pCfg" -ForegroundColor Gray
             }
-            $civ = [PSCustomObject]@{
-                created = (Get-Date -Format "yyyy-MM-ddTHH:mm:ss.fffZ")
-                icon = "Furnace"
-                lastUsed = (Get-Date -Format "yyyy-MM-ddTHH:mm:ss.fffZ")
-                lastVersionId = "1.21.8-forge-58.1.7"
-                name = "Civilization 1.21.8"
-                type = "custom"
-            }
-            $json.profiles | Add-Member -MemberType NoteProperty -Name "Civilization" -Value $civ -Force
-            $json | ConvertTo-Json -Depth 10 | Set-Content $lpPath -Encoding utf8
-            Write-Host "[+] Профиль 'Civilization 1.21.8' добавлен в launcher_profiles.json" -ForegroundColor Green
-        } catch {
-            Write-Host "[!] Заметка: не удалось автоматически обновить launcher_profiles.json" -ForegroundColor Gray
         }
     }
 
@@ -245,10 +200,13 @@ try {
     Write-Host "               УСТАНОВКА УСПЕШНО ЗАВЕРШЕНА!                       " -ForegroundColor Green
     Write-Host "==================================================================" -ForegroundColor Green
     Write-Host ""
+    Write-Host "Все файлы установлены изолированно в:" -ForegroundColor Cyan
+    Write-Host "$civDst" -ForegroundColor White
+    Write-Host ""
     Write-Host "Что делать дальше:" -ForegroundColor Cyan
-    Write-Host "1. Откройте ваш лаунчер (Minecraft Launcher, TLauncher, Legacy)." -ForegroundColor White
-    Write-Host "2. Выберите версию: 'Civilization 1.21.8' (или '1.21.8-forge-58.1.7')." -ForegroundColor White
-    Write-Host "3. Нажмите 'Играть' / 'Войти в игру'!" -ForegroundColor White
+    Write-Host "1. Откройте лаунчер (TLauncher, Legacy, Minecraft Launcher)." -ForegroundColor White
+    Write-Host "2. В списке версий выберите: 'Civilization'." -ForegroundColor White
+    Write-Host "3. Нажмите 'Войти в игру'!" -ForegroundColor White
     Write-Host ""
 
 } catch {

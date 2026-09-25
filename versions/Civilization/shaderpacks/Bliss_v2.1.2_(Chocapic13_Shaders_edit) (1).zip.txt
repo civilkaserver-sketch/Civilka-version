@@ -1,0 +1,3 @@
+#Thu Sep 17 20:36:32 EEST 2026
+TONEMAP=ToneMap_Hejl2015
+moon_illuminance=30.0
