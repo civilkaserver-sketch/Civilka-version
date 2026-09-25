@@ -11,48 +11,60 @@ echo.
 set SCRIPT_DIR=%~dp0
 set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
 
-:: 1. Проверяем наличие локальных файлов версии
-if not exist "%SCRIPT_DIR%\versions\1.21.8-forge-58.1.7" (
-    echo [i] Файлы версии не найдены локально.
-    echo [i] Попытка загрузки сборки с GitHub (Civilka-version)...
-    echo.
-    where git >nul 2>nul
-    if %ERRORLEVEL% equ 0 (
-        echo [*] Клонирование через Git...
-        git clone https://github.com/civilkaserver-sketch/Civilka-version.git "%SCRIPT_DIR%\Civilka-version"
-        if exist "%SCRIPT_DIR%\Civilka-version\versions\1.21.8-forge-58.1.7" (
-            set SCRIPT_DIR=%SCRIPT_DIR%\Civilka-version
+:: 1. Проверяем локальные файлы (рядом со скриптом)
+if exist "%SCRIPT_DIR%\versions\1.21.8-forge-58.1.7" goto :DETECT_MC
+
+:: Проверяем кэш во временной папке
+if exist "%TEMP%\Civilka-version\versions\1.21.8-forge-58.1.7" (
+    echo [+] Найдена ранее загруженная сборка в кэше: %TEMP%\Civilka-version
+    set SCRIPT_DIR=%TEMP%\Civilka-version
+    goto :DETECT_MC
+)
+
+echo [i] Локальные файлы сборки не найдены рядом со скриптом.
+echo [i] Загрузка актуальной сборки с GitHub...
+echo.
+
+set WORK_DIR=%TEMP%\Civilka-version
+if exist "%WORK_DIR%" rmdir /s /q "%WORK_DIR%" 2>nul
+mkdir "%WORK_DIR%" 2>nul
+
+where git >nul 2>nul
+if %ERRORLEVEL% equ 0 (
+    echo [*] Клонирование через Git (--depth 1)...
+    git clone --depth 1 https://github.com/civilkaserver-sketch/Civilka-version.git "%WORK_DIR%"
+    if exist "%WORK_DIR%\versions\1.21.8-forge-58.1.7" (
+        set SCRIPT_DIR=%WORK_DIR%
+        goto :DETECT_MC
+    )
+)
+
+echo [*] Загрузка архива сборки с GitHub через curl...
+where curl >nul 2>nul
+if %ERRORLEVEL% equ 0 (
+    curl -L --progress-bar -o "%TEMP%\civilka_temp.zip" "https://github.com/civilkaserver-sketch/Civilka-version/archive/refs/heads/main.zip"
+    if exist "%TEMP%\civilka_temp.zip" (
+        echo [*] Распаковка архива...
+        powershell -NoProfile -Command "Expand-Archive -Path '%TEMP%\civilka_temp.zip' -DestinationPath '%TEMP%\civilka_extracted' -Force"
+        del /f /q "%TEMP%\civilka_temp.zip"
+        if exist "%TEMP%\civilka_extracted\Civilka-version-main\versions\1.21.8-forge-58.1.7" (
+            set SCRIPT_DIR=%TEMP%\civilka_extracted\Civilka-version-main
             goto :DETECT_MC
         )
     )
-    
-    echo [*] Git не найден или не сработал. Загрузка архива через curl...
-    where curl >nul 2>nul
-    if %ERRORLEVEL% equ 0 (
-        curl -L -o "%SCRIPT_DIR%\civilka_temp.zip" "https://github.com/civilkaserver-sketch/Civilka-version/archive/refs/heads/main.zip"
-        if exist "%SCRIPT_DIR%\civilka_temp.zip" (
-            echo [*] Распаковка архива...
-            powershell -NoProfile -Command "Expand-Archive -Path '%SCRIPT_DIR%\civilka_temp.zip' -DestinationPath '%SCRIPT_DIR%' -Force"
-            del /f /q "%SCRIPT_DIR%\civilka_temp.zip"
-            if exist "%SCRIPT_DIR%\Civilka-version-main\versions\1.21.8-forge-58.1.7" (
-                set SCRIPT_DIR=%SCRIPT_DIR%\Civilka-version-main
-                goto :DETECT_MC
-            )
-        )
-    )
-    
-    echo.
-    echo [ОШИБКА] Не удалось найти или загрузить файлы сборки!
-    echo Убедитесь, что интернет подключен или распакуйте архив полностью.
-    pause
-    exit /b 1
 )
 
+echo.
+echo [ОШИБКА] Не удалось загрузить файлы сборки! Проверьте интернет.
+pause
+exit /b 1
+
 :DETECT_MC
+echo.
 echo [*] Поиск папки Minecraft...
 set MC_DIR=
 
-:: Проверяем пути
+:: Проверяем стандартные пути
 if exist "%APPDATA%\.minecraft" set MC_DIR=%APPDATA%\.minecraft
 if not defined MC_DIR if exist "E:\Games\.minecraft" set MC_DIR=E:\Games\.minecraft
 if not defined MC_DIR if exist "D:\Games\.minecraft" set MC_DIR=D:\Games\.minecraft
