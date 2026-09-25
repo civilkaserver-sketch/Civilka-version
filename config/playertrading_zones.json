@@ -1,0 +1,16 @@
+{
+  "zones": [
+    {
+      "id": "sports_ground",
+      "title": "Спортплощадка",
+      "subtitle": "",
+      "dimension": "minecraft:overworld",
+      "minX": -2312,
+      "minY": 55,
+      "minZ": 2270,
+      "maxX": -2297,
+      "maxY": 80,
+      "maxZ": 2281
+    }
+  ]
+}
