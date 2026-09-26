@@ -24,6 +24,19 @@
       "maxY": 320,
       "maxZ": -225,
       "isProtected": true
+    },
+    {
+      "id": "tavern",
+      "title": "Таверна",
+      "subtitle": "Приват",
+      "dimension": "minecraft:the_nether",
+      "minX": -172,
+      "minY": 0,
+      "minZ": -49,
+      "maxX": -156,
+      "maxY": 128,
+      "maxZ": -24,
+      "isProtected": true
     }
   ]
 }
