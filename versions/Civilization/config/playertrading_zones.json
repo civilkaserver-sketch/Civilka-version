@@ -15,14 +15,15 @@
     {
       "id": "center",
       "title": "Центр",
-      "subtitle": "",
+      "subtitle": "Приват",
       "dimension": "minecraft:overworld",
-      "minX": -1176,
-      "minY": 55,
-      "minZ": -260,
-      "maxX": -1149,
-      "maxY": 110,
-      "maxZ": -234
+      "minX": -1181,
+      "minY": -64,
+      "minZ": -263,
+      "maxX": -1138,
+      "maxY": 320,
+      "maxZ": -225,
+      "isProtected": true
     }
   ]
 }
