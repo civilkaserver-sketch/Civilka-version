@@ -11,6 +11,18 @@
       "maxX": -2297,
       "maxY": 80,
       "maxZ": 2281
+    },
+    {
+      "id": "center",
+      "title": "Центр",
+      "subtitle": "",
+      "dimension": "minecraft:overworld",
+      "minX": -1176,
+      "minY": 55,
+      "minZ": -260,
+      "maxX": -1149,
+      "maxY": 110,
+      "maxZ": -234
     }
   ]
 }
