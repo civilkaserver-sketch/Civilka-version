@@ -37,6 +37,20 @@
       "maxY": 128,
       "maxZ": -24,
       "isProtected": true
+    },
+    {
+      "id": "hell_island",
+      "title": "Адский остров",
+      "subtitle": "Приват",
+      "dimension": "minecraft:overworld",
+      "minX": -1176,
+      "minY": -64,
+      "minZ": -2891,
+      "maxX": -1086,
+      "maxY": 320,
+      "maxZ": -2801,
+      "isProtected": true,
+      "pvpDisabled": true
     }
   ]
 }
