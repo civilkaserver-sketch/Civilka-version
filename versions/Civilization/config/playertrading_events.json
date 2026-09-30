@@ -1,0 +1,81 @@
+{
+  "randomEventsEnabled": true,
+  "minCooldownMinutes": 60,
+  "maxCooldownMinutes": 240,
+  "lastEventId": "silence",
+  "nextEventGameTime": 18430840,
+  "spawns": {
+    "bellringer": {
+      "dimension": "minecraft:overworld",
+      "x": 0.0,
+      "y": 64.0,
+      "z": 0.0,
+      "yaw": 0.0,
+      "pitch": 0.0,
+      "enabled": false
+    },
+    "midnight": {
+      "dimension": "minecraft:overworld",
+      "x": 0.0,
+      "y": 64.0,
+      "z": 0.0,
+      "yaw": 0.0,
+      "pitch": 0.0,
+      "enabled": false
+    },
+    "the_blind": {
+      "dimension": "minecraft:overworld",
+      "x": 0.0,
+      "y": 64.0,
+      "z": 0.0,
+      "yaw": 0.0,
+      "pitch": 0.0,
+      "enabled": false
+    },
+    "dreamer": {
+      "dimension": "minecraft:overworld",
+      "x": -1375.5,
+      "y": 294.0,
+      "z": 842.5,
+      "yaw": 90.0,
+      "pitch": 0.0,
+      "enabled": true
+    },
+    "bony": {
+      "dimension": "minecraft:overworld",
+      "x": 0.0,
+      "y": 64.0,
+      "z": 0.0,
+      "yaw": 0.0,
+      "pitch": 0.0,
+      "enabled": false
+    },
+    "executioner": {
+      "dimension": "minecraft:overworld",
+      "x": -2301.41,
+      "y": 64.0,
+      "z": 2272.66,
+      "yaw": 61.1,
+      "pitch": 2.31,
+      "enabled": true
+    },
+    "desert_merchant": {
+      "dimension": "minecraft:overworld",
+      "x": 3419.58,
+      "y": 75.0,
+      "z": -5359.44,
+      "yaw": -223.3,
+      "pitch": -1.05,
+      "enabled": true
+    },
+    "hermit": {
+      "dimension": "minecraft:overworld",
+      "x": -1131.23,
+      "y": 79.5,
+      "z": -2846.43,
+      "yaw": 42.8,
+      "pitch": 43.65,
+      "enabled": true
+    }
+  }
+}
