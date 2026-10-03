@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/elytra"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 777
+      },
+      "model": "minecraft:item/angel_elytra"
+    }
+  ]
+}

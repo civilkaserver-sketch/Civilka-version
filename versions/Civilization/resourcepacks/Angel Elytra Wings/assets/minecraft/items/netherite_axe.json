@@ -10,6 +10,13 @@
           "type": "minecraft:model",
           "model": "minecraft:item/blood_axe"
         }
+      },
+      {
+        "when": "bloox_axe",
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/blood_axe"
+        }
       }
     ],
     "fallback": {

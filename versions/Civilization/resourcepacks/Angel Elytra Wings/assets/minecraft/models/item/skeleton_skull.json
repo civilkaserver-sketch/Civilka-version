@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/skeleton_skull"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 781
+      },
+      "model": "minecraft:item/bone_brotherhood"
+    }
+  ]
+}

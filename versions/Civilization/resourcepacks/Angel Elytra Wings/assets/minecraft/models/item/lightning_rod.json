@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/lightning_rod"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 782
+      },
+      "model": "minecraft:item/storm_lord"
+    }
+  ]
+}

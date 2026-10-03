@@ -10,6 +10,13 @@
           "type": "minecraft:model",
           "model": "minecraft:item/silent_step"
         }
+      },
+      {
+        "when": "mirror_armor",
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/mirror_armor"
+        }
       }
     ],
     "fallback": {

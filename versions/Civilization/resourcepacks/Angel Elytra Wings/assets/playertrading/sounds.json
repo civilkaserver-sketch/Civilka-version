@@ -1,0 +1,58 @@
+{
+  "white_noise": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "playertrading:white_noise",
+        "stream": true
+      }
+    ]
+  },
+  "heartbeat": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "playertrading:heartbeat",
+        "stream": true
+      }
+    ]
+  },
+  "fog_ambience": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "playertrading:fog/fog_ambience",
+        "stream": true
+      }
+    ]
+  },
+  "fog_start": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "playertrading:fog/fog_start",
+        "stream": true
+      }
+    ]
+  },
+  "sinyavsky_location": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "playertrading:fog/sinyavsky_location",
+        "stream": true
+      }
+    ]
+  },
+  "fog_scare": {
+    "category": "ambient",
+    "sounds": [
+      "playertrading:fog/fog_scare_1",
+      "playertrading:fog/fog_scare_2",
+      "playertrading:fog/fog_scare_3",
+      "playertrading:fog/fog_scare_4",
+      "playertrading:fog/fog_scare_5",
+      "playertrading:fog/fog_scare_6"
+    ]
+  }
+}
