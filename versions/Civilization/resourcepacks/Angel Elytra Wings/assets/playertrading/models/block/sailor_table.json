@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "particle": "playertrading:block/sailor_table_front",
-    "down": "playertrading:block/sailor_table_bottom",
     "up": "playertrading:block/sailor_table_top",
+    "down": "playertrading:block/sailor_table_bottom",
     "north": "playertrading:block/sailor_table_front",
     "south": "playertrading:block/sailor_table_front",
-    "east": "playertrading:block/sailor_table_side",
-    "west": "playertrading:block/sailor_table_side"
+    "west": "playertrading:block/sailor_table_left",
+    "east": "playertrading:block/sailor_table_right",
+    "particle": "playertrading:block/sailor_table_front"
   }
 }
