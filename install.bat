@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 title Установка Civilization 1.21.8
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$f='%~f0'; $lines = [System.IO.File]::ReadAllLines($f, [System.Text.Encoding]::UTF8); $start = $false; $sb = New-Object System.Text.StringBuilder; foreach($l in $lines){ if($start){ [void]$sb.AppendLine($l) } elseif($l.StartsWith('::PS_CODE::')){ $start = $true } }; Invoke-Expression $sb.ToString()"
 if %ERRORLEVEL% neq 0 (
@@ -169,7 +169,7 @@ try {
     Write-Host ""
 
     # 1. Библиотеки Forge
-    Write-Host "[1/2] Установка библиотек Forge (134 файла) в .minecraft/libraries..." -ForegroundColor Yellow
+    Write-Host "[1/2] Установка библиотек Fabric в .minecraft/libraries..." -ForegroundColor Yellow
     $libSrc = Join-Path $sourceDir "libraries"
     $libDst = Join-Path $mcDir "libraries"
     if (Test-Path $libSrc) {
@@ -179,8 +179,8 @@ try {
 
     # 2. Изолированная версия Civilization
     Write-Host "[2/2] Установка версии в .minecraft/versions/Civilization..." -ForegroundColor Yellow
-    Write-Host "      - Все 13 модов (playertrading, simplemenu, OptiFine, Xaeros)" -ForegroundColor Gray
-    Write-Host "      - Ресурспаки и артефакты (Звездный оберег, Кровавый топор, Поступь тени)" -ForegroundColor Gray
+    Write-Host "      - 18 Fabric-модов (PlayerTrading, Sodium, Iris, Xaero's, Lithium, FerriteCore)" -ForegroundColor Gray
+    Write-Host "      - Вшитый официальный ресурспак (CivilizationServerPack.zip)" -ForegroundColor Gray
     Write-Host "      - Шейдерпаки" -ForegroundColor Gray
     Write-Host "      - Меню SimpleMenu (фоны, логотипы, иконки)" -ForegroundColor Gray
     Write-Host "      - Список серверов (servers.dat с сервером Civilization)" -ForegroundColor Gray
@@ -239,3 +239,4 @@ try {
 }
 
 Read-Host "Нажмите ENTER для выхода"
+

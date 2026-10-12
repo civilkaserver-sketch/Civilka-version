@@ -1,4 +1,4 @@
-version:4440
+﻿version:4440
 ao:true
 biomeBlendRadius:2
 enableVsync:false
@@ -27,7 +27,7 @@ cloudRange:128
 renderDistance:13
 simulationDistance:5
 screenEffectScale:1.0
-soundDevice:"OpenAL Soft on Наушники (2- Philips TAT2139)"
+soundDevice:"OpenAL Soft on РќР°СѓС€РЅРёРєРё (2- Philips TAT2139)"
 autoJump:false
 rotateWithMinecart:false
 operatorItemsTab:false
@@ -52,8 +52,8 @@ damageTiltStrength:1.0
 highContrast:false
 highContrastBlockOutline:false
 narratorHotkey:true
-resourcePacks:["mod_resources","vanilla","file/Os\u0027 Colorful Cobblestone.zip","file/Os\u0027 Colorful Leaves - 1.21.8.zip","file/animated-items 1.21.x-26.1.x-26.2 - v1.6.3.zip","file/axolotl_bucket_variants-v55.zip","file/remodeledcactus.zip","file/visual_armor_trims_4.0_1.21.5+.zip","file/§4Drodi\u0027s Illagers [v5.3.2].zip","file/§6Drodi\u0027s Villagers [V2.8.1].zip","file/§9Better Boats.zip","file/§9§lWavy Water §7v2.0.4.zip","file/LowOnFire v26.2§8.zip","file/Fast Better Grass (1).zip","file/Simple Grass Flowers v2.0.0.zip","file/FBGFSGF v1.0.zip","file/EvenBetterEnchants_v3_1.21.5+.zip","file/Animated_Furnaces_(1.21).zip","file/Authentic Shadows_1.21+ (1).zip","file/EnderEyes_26.2_v3.1.zip","file/Sun \u0026 Moon Fusion 3.zip","file/visible-ores2.13.zip","file/Angel Elytra Wings.zip"]
-incompatibleResourcePacks:["file/Os\u0027 Colorful Cobblestone.zip","file/remodeledcactus.zip","file/Animated_Furnaces_(1.21).zip","file/visible-ores2.13.zip"]
+resourcePacks:["vanilla","fabric","file/CivilizationServerPack.zip","civilization_locked_CivilizationServerPack.zip"]
+incompatibleResourcePacks:[]
 lastServer:127.0.0.1:25565
 lang:ru_ru
 chatVisibility:0
