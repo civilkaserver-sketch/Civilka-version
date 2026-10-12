@@ -1,4 +1,4 @@
-﻿# ========================================================
+# ========================================================
 # Git Ignore for Civilka-version Client Distribution
 # ========================================================
 
@@ -18,7 +18,9 @@
 
 # 4. Player saves, screenshots, logs, crash reports
 **/saves/
-**/screenshots/
+# Screenshots: keep directory via .gitkeep, ignore any screenshot images
+**/screenshots/*
+!**/screenshots/.gitkeep
 **/logs/
 **/crash-reports/
 **/server-resource-packs/
