@@ -1,4 +1,4 @@
-﻿version:4440
+version:4440
 ao:true
 biomeBlendRadius:2
 enableVsync:false
@@ -27,7 +27,7 @@ cloudRange:128
 renderDistance:13
 simulationDistance:5
 screenEffectScale:1.0
-soundDevice:"OpenAL Soft on РќР°СѓС€РЅРёРєРё (2- Philips TAT2139)"
+soundDevice:"OpenAL Soft on Наушники (2- Philips TAT2139)"
 autoJump:false
 rotateWithMinecart:false
 operatorItemsTab:false
@@ -52,7 +52,7 @@ damageTiltStrength:1.0
 highContrast:false
 highContrastBlockOutline:false
 narratorHotkey:true
-resourcePacks:["vanilla","fabric","file/CivilizationServerPack.zip","civilization_locked_CivilizationServerPack.zip"]
+resourcePacks:["vanilla","fabric","civilization_locked_CivilizationServerPack.zip"]
 incompatibleResourcePacks:[]
 lastServer:127.0.0.1:25565
 lang:ru_ru
