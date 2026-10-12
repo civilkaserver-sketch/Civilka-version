@@ -10,7 +10,9 @@
       "minZ": 2270,
       "maxX": -2297,
       "maxY": 80,
-      "maxZ": 2281
+      "maxZ": 2281,
+      "isProtected": false,
+      "pvpDisabled": false
     },
     {
       "id": "center",
@@ -23,7 +25,8 @@
       "maxX": -1138,
       "maxY": 320,
       "maxZ": -225,
-      "isProtected": true
+      "isProtected": true,
+      "pvpDisabled": true
     },
     {
       "id": "tavern",
@@ -31,12 +34,41 @@
       "subtitle": "Приват",
       "dimension": "minecraft:the_nether",
       "minX": -172,
-      "minY": 0,
+      "minY": 78,
       "minZ": -49,
       "maxX": -156,
-      "maxY": 128,
+      "maxY": 86,
       "maxZ": -24,
-      "isProtected": true
+      "isProtected": true,
+      "pvpDisabled": true
+    },
+    {
+      "id": "desert_island",
+      "title": "Пустынный остров",
+      "subtitle": "Приват",
+      "dimension": "minecraft:overworld",
+      "minX": 3401,
+      "minY": -64,
+      "minZ": -5402,
+      "maxX": 3451,
+      "maxY": 320,
+      "maxZ": -5330,
+      "isProtected": true,
+      "pvpDisabled": true
+    },
+    {
+      "id": "celestial_islands",
+      "title": "Небесные острова",
+      "subtitle": "",
+      "dimension": "minecraft:overworld",
+      "minX": -1550,
+      "minY": 220,
+      "minZ": 720,
+      "maxX": -1280,
+      "maxY": 384,
+      "maxZ": 980,
+      "isProtected": false,
+      "pvpDisabled": false
     },
     {
       "id": "hell_island",
@@ -51,6 +83,48 @@
       "maxZ": -2801,
       "isProtected": true,
       "pvpDisabled": true
+    },
+    {
+      "id": "vibecoder_stop_1",
+      "title": "Остановка 2-В",
+      "subtitle": "",
+      "dimension": "minecraft:the_nether",
+      "minX": -155,
+      "minY": 57,
+      "minZ": -58,
+      "maxX": -147,
+      "maxY": 65,
+      "maxZ": -45,
+      "isProtected": false,
+      "pvpDisabled": false
+    },
+    {
+      "id": "eternally_leaky_stop",
+      "title": "Остановка вічно дирявим",
+      "subtitle": "",
+      "dimension": "minecraft:the_nether",
+      "minX": -164,
+      "minY": 57,
+      "minZ": 5,
+      "maxX": -152,
+      "maxY": 65,
+      "maxZ": 13,
+      "isProtected": false,
+      "pvpDisabled": false
+    },
+    {
+      "id": "world_web_stop",
+      "title": "Остановка Всесвітня павутинка мережа интернет",
+      "subtitle": "",
+      "dimension": "minecraft:the_nether",
+      "minX": 174,
+      "minY": 56,
+      "minZ": -61,
+      "maxX": 182,
+      "maxY": 66,
+      "maxZ": -38,
+      "isProtected": false,
+      "pvpDisabled": false
     }
   ]
 }

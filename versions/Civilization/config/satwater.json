@@ -1,0 +1,7 @@
+{
+  "daySaturation": 1.0,
+  "nightSaturation": 1.0,
+  "dayWaterOpacity": 1.0,
+  "nightWaterOpacity": 1.0,
+  "smoothDayNightTransition": true
+}

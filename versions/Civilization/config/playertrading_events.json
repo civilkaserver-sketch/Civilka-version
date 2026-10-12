@@ -2,8 +2,8 @@
   "randomEventsEnabled": true,
   "minCooldownMinutes": 60,
   "maxCooldownMinutes": 240,
-  "lastEventId": "silence",
-  "nextEventGameTime": 18430840,
+  "lastEventId": "",
+  "nextEventGameTime": 154816,
   "spawns": {
     "bellringer": {
       "dimension": "minecraft:overworld",
