@@ -1,10 +1,10 @@
-п»ї@echo off
-title РЈСЃС‚Р°РЅРѕРІРєР° Civilization 1.21.8
+@echo off
+title Установка Civilization 1.21.8
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$f='%~f0'; $lines = [System.IO.File]::ReadAllLines($f, [System.Text.Encoding]::UTF8); $start = $false; $sb = New-Object System.Text.StringBuilder; foreach($l in $lines){ if($start){ [void]$sb.AppendLine($l) } elseif($l.StartsWith('::PS_CODE::')){ $start = $true } }; Invoke-Expression $sb.ToString()"
 if %ERRORLEVEL% neq 0 (
     echo.
     echo ==================================================================
-    echo [РћРЁРР‘РљРђ] РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё СѓСЃС‚Р°РЅРѕРІС‰РёРєР°.
+    echo [ОШИБКА] Произошла ошибка при выполнении установщика.
     echo ==================================================================
     pause
 )
@@ -12,12 +12,12 @@ exit /b
 
 ::PS_CODE::
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-[Console]::Title = "РЈСЃС‚Р°РЅРѕРІРєР° Civilization 1.21.8"
+[Console]::Title = "Установка Civilization 1.21.8"
 
 function Print-Header {
     Clear-Host
     Write-Host "==================================================================" -ForegroundColor Cyan
-    Write-Host "              РЈРЎРўРђРќРћР’РљРђ РљР›РР•РќРўРђ CIVILIZATION 1.21.8               " -ForegroundColor Yellow
+    Write-Host "              УСТАНОВКА КЛИЕНТА CIVILIZATION 1.21.8               " -ForegroundColor Yellow
     Write-Host "==================================================================" -ForegroundColor Cyan
     Write-Host ""
 }
@@ -28,16 +28,16 @@ try {
     $scriptDir = Split-Path -Parent $f
     $sourceDir = $null
 
-    # 1. РџСЂРѕРІРµСЂСЏРµРј Р»РѕРєР°Р»СЊРЅС‹Рµ С„Р°Р№Р»С‹
+    # 1. Проверяем локальные файлы
     if (Test-Path (Join-Path $scriptDir "versions\Civilization\Civilization.json")) {
         $sourceDir = $scriptDir
-        Write-Host "[+] Р›РѕРєР°Р»СЊРЅС‹Рµ С„Р°Р№Р»С‹ СЃР±РѕСЂРєРё РЅР°Р№РґРµРЅС‹." -ForegroundColor Green
+        Write-Host "[+] Локальные файлы сборки найдены." -ForegroundColor Green
     } elseif (Test-Path "$env:TEMP\Civilka-version\versions\Civilization\Civilization.json") {
         $sourceDir = "$env:TEMP\Civilka-version"
-        Write-Host "[+] РќР°Р№РґРµРЅР° СЃР±РѕСЂРєР° РІ РєСЌС€Рµ: $sourceDir" -ForegroundColor Green
+        Write-Host "[+] Найдена сборка в кэше: $sourceDir" -ForegroundColor Green
     } else {
-        Write-Host "[i] Р›РѕРєР°Р»СЊРЅС‹Рµ С„Р°Р№Р»С‹ СЃР±РѕСЂРєРё РЅРµ РЅР°Р№РґРµРЅС‹ СЂСЏРґРѕРј СЃРѕ СЃРєСЂРёРїС‚РѕРј." -ForegroundColor Cyan
-        Write-Host "[i] РќР°С‡РёРЅР°РµС‚СЃСЏ Р·Р°РіСЂСѓР·РєР° Р°РєС‚СѓР°Р»СЊРЅРѕР№ СЃР±РѕСЂРєРё СЃ GitHub..." -ForegroundColor Cyan
+        Write-Host "[i] Локальные файлы сборки не найдены рядом со скриптом." -ForegroundColor Cyan
+        Write-Host "[i] Начинается загрузка актуальной сборки с GitHub..." -ForegroundColor Cyan
         Write-Host ""
 
         $targetWork = "$env:TEMP\Civilka-version"
@@ -48,17 +48,17 @@ try {
         $downloaded = $false
 
         if ($gitCmd) {
-            Write-Host "[*] РљР»РѕРЅРёСЂРѕРІР°РЅРёРµ СЃР±РѕСЂРєРё С‡РµСЂРµР· Git (--depth 1)..." -ForegroundColor Yellow
+            Write-Host "[*] Клонирование сборки через Git (--depth 1)..." -ForegroundColor Yellow
             $cloneRes = Start-Process -FilePath "git" -ArgumentList "clone --depth 1 https://github.com/civilkaserver-sketch/Civilka-version.git `"$targetWork`"" -NoNewWindow -Wait -PassThru
             if ($cloneRes.ExitCode -eq 0 -and (Test-Path (Join-Path $targetWork "versions\Civilization\Civilization.json"))) {
                 $sourceDir = $targetWork
                 $downloaded = $true
-                Write-Host "[+] РЎР±РѕСЂРєР° СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР¶РµРЅР° С‡РµСЂРµР· Git!" -ForegroundColor Green
+                Write-Host "[+] Сборка успешно загружена через Git!" -ForegroundColor Green
             }
         }
 
         if (-not $downloaded) {
-            Write-Host "[*] Р—Р°РіСЂСѓР·РєР° СЃР±РѕСЂРєРё С‡РµСЂРµР· РІРµР±-Р·Р°РїСЂРѕСЃ (zip)..." -ForegroundColor Yellow
+            Write-Host "[*] Загрузка сборки через веб-запрос (zip)..." -ForegroundColor Yellow
             $zipPath = "$env:TEMP\civilka_full.zip"
             $extPath = "$env:TEMP\civilka_extracted"
             if (Test-Path $zipPath) { Remove-Item -Force $zipPath -ErrorAction SilentlyContinue }
@@ -76,7 +76,7 @@ try {
             }
 
             if (Test-Path $zipPath) {
-                Write-Host "[*] Р Р°СЃРїР°РєРѕРІРєР° СЃР±РѕСЂРєРё..." -ForegroundColor Yellow
+                Write-Host "[*] Распаковка сборки..." -ForegroundColor Yellow
                 Expand-Archive -Path $zipPath -DestinationPath $extPath -Force
                 Remove-Item -Force $zipPath -ErrorAction SilentlyContinue
                 
@@ -84,22 +84,22 @@ try {
                 if (Test-Path (Join-Path $unpacked "versions\Civilization\Civilization.json")) {
                     $sourceDir = $unpacked
                     $downloaded = $true
-                    Write-Host "[+] РЎР±РѕСЂРєР° СѓСЃРїРµС€РЅРѕ СЂР°СЃРїР°РєРѕРІР°РЅР°!" -ForegroundColor Green
+                    Write-Host "[+] Сборка успешно распакована!" -ForegroundColor Green
                 }
             }
         }
 
         if (-not $downloaded) {
-            throw "РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р»С‹ СЃР±РѕСЂРєРё СЃ GitHub! РџСЂРѕРІРµСЂСЊС‚Рµ РёРЅС‚РµСЂРЅРµС‚."
+            throw "Не удалось загрузить файлы сборки с GitHub! Проверьте интернет."
         }
     }
 
     Write-Host ""
-    Write-Host "[*] РџРѕРёСЃРє Р°РєС‚РёРІРЅРѕР№ РїР°РїРєРё Minecraft..." -ForegroundColor Cyan
+    Write-Host "[*] Поиск активной папки Minecraft..." -ForegroundColor Cyan
 
     $detectedMc = $null
 
-    # 1. РџСЂРѕРІРµСЂСЏРµРј РЅР°СЃС‚СЂРѕР№РєРё TLauncher (СЃР°РјС‹Р№ С‚РѕС‡РЅС‹Р№ СЃРїРѕСЃРѕР± РґР»СЏ TLauncher РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№)
+    # 1. Проверяем настройки TLauncher (самый точный способ для TLauncher пользователей)
     $tlProps = Join-Path $env:APPDATA ".tlauncher\tlauncher-2.0.properties"
     if (Test-Path $tlProps) {
         $lines = Get-Content $tlProps -Encoding utf8
@@ -108,14 +108,14 @@ try {
                 $raw = $matches[1].Replace("\:", ":").Replace("\\", "\").Trim()
                 if (Test-Path $raw) {
                     $detectedMc = $raw
-                    Write-Host "[+] РќР°Р№РґРµРЅР° РїР°РїРєР° Minecraft РёР· РЅР°СЃС‚СЂРѕРµРє TLauncher!" -ForegroundColor Green
+                    Write-Host "[+] Найдена папка Minecraft из настроек TLauncher!" -ForegroundColor Green
                     break
                 }
             }
         }
     }
 
-    # 2. Р•СЃР»Рё TLauncher РЅРµ СѓРєР°Р·Р°Р» РїСѓС‚СЊ, РїСЂРѕРІРµСЂСЏРµРј СЃС‚Р°РЅРґР°СЂС‚РЅС‹Рµ РїР°РїРєРё
+    # 2. Если TLauncher не указал путь, проверяем стандартные папки
     if (-not $detectedMc) {
         $candidates = @(
             "E:\Games\.minecraft",
@@ -134,42 +134,42 @@ try {
     }
 
     if ($detectedMc) {
-        Write-Host "[+] РџР°РїРєР° Minecraft: " -NoNewline -ForegroundColor Green
+        Write-Host "[+] Папка Minecraft: " -NoNewline -ForegroundColor Green
         Write-Host "$detectedMc" -ForegroundColor White
         Write-Host ""
-        Write-Host "РќР°Р¶РјРёС‚Рµ ENTER РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РІ СЌС‚Сѓ РїР°РїРєСѓ," -ForegroundColor Yellow
-        Write-Host "РёР»Рё РІРІРµРґРёС‚Рµ РґСЂСѓРіРѕР№ РїСѓС‚СЊ РІСЂСѓС‡РЅСѓСЋ:" -ForegroundColor Yellow
-        $userMc = Read-Host "РџСѓС‚СЊ (РёР»Рё ENTER)"
+        Write-Host "Нажмите ENTER для установки в эту папку," -ForegroundColor Yellow
+        Write-Host "или введите другой путь вручную:" -ForegroundColor Yellow
+        $userMc = Read-Host "Путь (или ENTER)"
         if ([string]::IsNullOrWhiteSpace($userMc)) {
             $mcDir = $detectedMc
         } else {
             $mcDir = $userMc.Trim('"', ' ')
         }
     } else {
-        Write-Host "[!] РџР°РїРєР° Minecraft РЅРµ РЅР°Р№РґРµРЅР° Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё." -ForegroundColor Yellow
-        $mcDir = (Read-Host "Р’РІРµРґРёС‚Рµ РїРѕР»РЅС‹Р№ РїСѓС‚СЊ Рє РїР°РїРєРµ .minecraft").Trim('"', ' ')
+        Write-Host "[!] Папка Minecraft не найдена автоматически." -ForegroundColor Yellow
+        $mcDir = (Read-Host "Введите полный путь к папке .minecraft").Trim('"', ' ')
     }
 
     if (-not (Test-Path $mcDir)) {
-        Write-Host "[!] РџР°РїРєР° '$mcDir' РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚. РЎРѕР·РґР°С‚СЊ? (Y/N): " -NoNewline -ForegroundColor Yellow
+        Write-Host "[!] Папка '$mcDir' не существует. Создать? (Y/N): " -NoNewline -ForegroundColor Yellow
         $ans = Read-Host
-        if ($ans -eq "Y" -or $ans -eq "y" -or $ans -eq "Р”" -or $ans -eq "Рґ" -or [string]::IsNullOrWhiteSpace($ans)) {
+        if ($ans -eq "Y" -or $ans -eq "y" -or $ans -eq "Д" -or $ans -eq "д" -or [string]::IsNullOrWhiteSpace($ans)) {
             New-Item -ItemType Directory -Path $mcDir -Force | Out-Null
         } else {
-            Write-Host "РЈСЃС‚Р°РЅРѕРІРєР° РѕС‚РјРµРЅРµРЅР° РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј." -ForegroundColor Red
-            Read-Host "РќР°Р¶РјРёС‚Рµ ENTER РґР»СЏ РІС‹С…РѕРґР°"
+            Write-Host "Установка отменена пользователем." -ForegroundColor Red
+            Read-Host "Нажмите ENTER для выхода"
             return
         }
     }
 
     Write-Host ""
     Write-Host "==================================================================" -ForegroundColor Cyan
-    Write-Host "РЈСЃС‚Р°РЅРѕРІРєР° РёР·РѕР»РёСЂРѕРІР°РЅРЅРѕР№ СЃР±РѕСЂРєРё Civilization РІ: $mcDir" -ForegroundColor Cyan
+    Write-Host "Установка изолированной сборки Civilization в: $mcDir" -ForegroundColor Cyan
     Write-Host "==================================================================" -ForegroundColor Cyan
     Write-Host ""
 
-    # 1. Р‘РёР±Р»РёРѕС‚РµРєРё Forge
-    Write-Host "[1/2] РЈСЃС‚Р°РЅРѕРІРєР° Р±РёР±Р»РёРѕС‚РµРє Fabric РІ .minecraft/libraries..." -ForegroundColor Yellow
+    # 1. Библиотеки Forge
+    Write-Host "[1/2] Установка библиотек Fabric в .minecraft/libraries..." -ForegroundColor Yellow
     $libSrc = Join-Path $sourceDir "libraries"
     $libDst = Join-Path $mcDir "libraries"
     if (Test-Path $libSrc) {
@@ -177,19 +177,19 @@ try {
         Copy-Item -Recurse -Force (Join-Path $libSrc "*") $libDst
     }
 
-    # 2. РР·РѕР»РёСЂРѕРІР°РЅРЅР°СЏ РІРµСЂСЃРёСЏ Civilization
-    Write-Host "[2/2] РЈСЃС‚Р°РЅРѕРІРєР° РІРµСЂСЃРёРё РІ .minecraft/versions/Civilization..." -ForegroundColor Yellow
-    Write-Host "      - 18 Fabric-РјРѕРґРѕРІ (PlayerTrading, Sodium, Iris, Xaero's, Lithium, FerriteCore)" -ForegroundColor Gray
-    Write-Host "      - Р’С€РёС‚С‹Р№ РѕС„РёС†РёР°Р»СЊРЅС‹Р№ СЂРµСЃСѓСЂСЃРїР°Рє (CivilizationServerPack.zip)" -ForegroundColor Gray
-    Write-Host "      - РЁРµР№РґРµСЂРїР°РєРё" -ForegroundColor Gray
-    Write-Host "      - РњРµРЅСЋ SimpleMenu (С„РѕРЅС‹, Р»РѕРіРѕС‚РёРїС‹, РёРєРѕРЅРєРё)" -ForegroundColor Gray
-    Write-Host "      - РЎРїРёСЃРѕРє СЃРµСЂРІРµСЂРѕРІ (servers.dat СЃ СЃРµСЂРІРµСЂРѕРј Civilization)" -ForegroundColor Gray
+    # 2. Изолированная версия Civilization
+    Write-Host "[2/2] Установка версии в .minecraft/versions/Civilization..." -ForegroundColor Yellow
+    Write-Host "      - 18 Fabric-модов (PlayerTrading, Sodium, Iris, Xaero's, Lithium, FerriteCore)" -ForegroundColor Gray
+    Write-Host "      - Вшитый официальный ресурспак (CivilizationServerPack.zip)" -ForegroundColor Gray
+    Write-Host "      - Папка shaderpacks (поддержка шейдеров Iris)" -ForegroundColor Gray
+    Write-Host "      - Меню SimpleMenu (фоны, логотипы, иконки)" -ForegroundColor Gray
+    Write-Host "      - Список серверов (servers.dat с сервером Civilization)" -ForegroundColor Gray
     $civSrc = Join-Path $sourceDir "versions\Civilization"
     $civDst = Join-Path $mcDir "versions\Civilization"
     if (-not (Test-Path $civDst)) { New-Item -ItemType Directory -Path $civDst -Force | Out-Null }
     Copy-Item -Recurse -Force (Join-Path $civSrc "*") $civDst
 
-    # Р РµРіРёСЃС‚СЂР°С†РёСЏ РїСЂРѕС„РёР»СЏ РІ launcher_profiles.json Рё TlauncherProfiles.json
+    # Регистрация профиля в launcher_profiles.json и TlauncherProfiles.json
     $profileConfigs = @("launcher_profiles.json", "TlauncherProfiles.json")
     foreach ($pCfg in $profileConfigs) {
         $lpPath = Join-Path $mcDir $pCfg
@@ -210,33 +210,33 @@ try {
                 }
                 $json.profiles | Add-Member -MemberType NoteProperty -Name "Civilization" -Value $civ -Force
                 $json | ConvertTo-Json -Depth 10 | Set-Content $lpPath -Encoding utf8
-                Write-Host "[+] РџСЂРѕС„РёР»СЊ 'Civilization' Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ РІ $pCfg" -ForegroundColor Green
+                Write-Host "[+] Профиль 'Civilization' зарегистрирован в $pCfg" -ForegroundColor Green
             } catch {
-                Write-Host "[!] Р—Р°РјРµС‚РєР°: РЅРµ СѓРґР°Р»РѕСЃСЊ РѕР±РЅРѕРІРёС‚СЊ $pCfg" -ForegroundColor Gray
+                Write-Host "[!] Заметка: не удалось обновить $pCfg" -ForegroundColor Gray
             }
         }
     }
 
     Write-Host ""
     Write-Host "==================================================================" -ForegroundColor Green
-    Write-Host "               РЈРЎРўРђРќРћР’РљРђ РЈРЎРџР•РЁРќРћ Р—РђР’Р•Р РЁР•РќРђ!                       " -ForegroundColor Green
+    Write-Host "               УСТАНОВКА УСПЕШНО ЗАВЕРШЕНА!                       " -ForegroundColor Green
     Write-Host "==================================================================" -ForegroundColor Green
     Write-Host ""
-    Write-Host "РџР°РїРєР° СЃР±РѕСЂРєРё: $civDst" -ForegroundColor Cyan
+    Write-Host "Папка сборки: $civDst" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "Р§С‚Рѕ РґРµР»Р°С‚СЊ РґР°Р»СЊС€Рµ:" -ForegroundColor Cyan
-    Write-Host "1. РћС‚РєСЂРѕР№С‚Рµ Р»Р°СѓРЅС‡РµСЂ (TLauncher, Legacy, Minecraft Launcher)." -ForegroundColor White
-    Write-Host "2. Р’ СЃРїРёСЃРєРµ РІРµСЂСЃРёР№ РІС‹Р±РµСЂРёС‚Рµ: 'Civilization'." -ForegroundColor White
-    Write-Host "3. РќР°Р¶РјРёС‚Рµ 'Р’РѕР№С‚Рё РІ РёРіСЂСѓ'!" -ForegroundColor White
+    Write-Host "Что делать дальше:" -ForegroundColor Cyan
+    Write-Host "1. Откройте лаунчер (TLauncher, Legacy, Minecraft Launcher)." -ForegroundColor White
+    Write-Host "2. В списке версий выберите: 'Civilization'." -ForegroundColor White
+    Write-Host "3. Нажмите 'Войти в игру'!" -ForegroundColor White
     Write-Host ""
 
 } catch {
     Write-Host ""
     Write-Host "==================================================================" -ForegroundColor Red
-    Write-Host "[РћРЁРР‘РљРђ] $_" -ForegroundColor Red
+    Write-Host "[ОШИБКА] $_" -ForegroundColor Red
     Write-Host "==================================================================" -ForegroundColor Red
     Write-Host ""
 }
 
-Read-Host "РќР°Р¶РјРёС‚Рµ ENTER РґР»СЏ РІС‹С…РѕРґР°"
+Read-Host "Нажмите ENTER для выхода"
 

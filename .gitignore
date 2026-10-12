@@ -1,0 +1,44 @@
+﻿# ========================================================
+# Git Ignore for Civilka-version Client Distribution
+# ========================================================
+
+# 1. Shaderpacks: keep directory via .gitkeep, ignore all shader archives
+**/shaderpacks/*
+!**/shaderpacks/.gitkeep
+
+# 2. Resourcepacks: keep ONLY CivilizationServerPack.zip and .gitkeep
+**/resourcepacks/*
+!**/resourcepacks/.gitkeep
+!**/resourcepacks/CivilizationServerPack.zip
+
+# 3. Map tiles, radar caches & player waypoints
+**/xaero/
+**/XaeroWaypoints*
+**/journeymap/
+
+# 4. Player saves, screenshots, logs, crash reports
+**/saves/
+**/screenshots/
+**/logs/
+**/crash-reports/
+**/server-resource-packs/
+
+# 5. Runtime caches, temporary and generated files
+**/.fabric/
+**/.voxy/
+**/cache/
+**/downloads/
+*.bak
+*.old
+*.log
+*.tmp
+usercache.json
+command_history.txt
+playertrading_discovered_npcs.json
+
+# 6. OS & IDE artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
