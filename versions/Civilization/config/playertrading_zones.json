@@ -1,18 +1,18 @@
 {
   "zones": [
     {
-      "id": "sports_ground",
-      "title": "Спортплощадка",
+      "id": "avdeev_island",
+      "title": "Остров Авдеева",
       "subtitle": "",
       "dimension": "minecraft:overworld",
-      "minX": -2312,
-      "minY": 55,
-      "minZ": 2270,
-      "maxX": -2297,
-      "maxY": 80,
-      "maxZ": 2281,
-      "isProtected": false,
-      "pvpDisabled": false
+      "minX": -2363,
+      "minY": -64,
+      "minZ": 2213,
+      "maxX": -2263,
+      "maxY": 320,
+      "maxZ": 2313,
+      "isProtected": true,
+      "pvpDisabled": true
     },
     {
       "id": "center",
@@ -125,6 +125,62 @@
       "maxZ": -38,
       "isProtected": false,
       "pvpDisabled": false
+    },
+    {
+      "id": "dragon_island",
+      "title": "Драконий остров",
+      "subtitle": "",
+      "dimension": "minecraft:overworld",
+      "minX": -282,
+      "minY": -64,
+      "minZ": -1429,
+      "maxX": -182,
+      "maxY": 320,
+      "maxZ": -1329,
+      "isProtected": true,
+      "pvpDisabled": true
+    },
+    {
+      "id": "island_400",
+      "title": "Остров 400",
+      "subtitle": "",
+      "dimension": "minecraft:overworld",
+      "minX": -280,
+      "minY": -64,
+      "minZ": -1647,
+      "maxX": -180,
+      "maxY": 320,
+      "maxZ": -1547,
+      "isProtected": true,
+      "pvpDisabled": true
+    },
+    {
+      "id": "ruins_island",
+      "title": "Остров Руин",
+      "subtitle": "",
+      "dimension": "minecraft:overworld",
+      "minX": 956,
+      "minY": -64,
+      "minZ": -830,
+      "maxX": 1116,
+      "maxY": 320,
+      "maxZ": -670,
+      "isProtected": true,
+      "pvpDisabled": true
+    },
+    {
+      "id": "dead_island",
+      "title": "Остров мертвых",
+      "subtitle": "",
+      "dimension": "minecraft:overworld",
+      "minX": -970,
+      "minY": -64,
+      "minZ": 740,
+      "maxX": -850,
+      "maxY": 320,
+      "maxZ": 860,
+      "isProtected": true,
+      "pvpDisabled": true
     }
   ]
 }
