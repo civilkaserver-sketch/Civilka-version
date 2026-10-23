@@ -181,6 +181,36 @@
       "maxZ": 860,
       "isProtected": true,
       "pvpDisabled": true
+    },
+    {
+      "id": "imperator_midass_base",
+      "title": "База IMPERATOR_MIDASS",
+      "subtitle": "Приват",
+      "dimension": "minecraft:overworld",
+      "minX": -1203,
+      "minY": -64,
+      "minZ": 157,
+      "maxX": -1123,
+      "maxY": 320,
+      "maxZ": 237,
+      "isProtected": true,
+      "pvpDisabled": true,
+      "owner": "IMPERATOR_MIDASS"
+    },
+    {
+      "id": "syn_mijaghi_base",
+      "title": "База syn_mijaghi",
+      "subtitle": "Приват",
+      "dimension": "minecraft:overworld",
+      "minX": -648,
+      "minY": -64,
+      "minZ": -211,
+      "maxX": -580,
+      "maxY": 320,
+      "maxZ": -116,
+      "isProtected": true,
+      "pvpDisabled": true,
+      "owner": "syn_mijaghi"
     }
   ]
 }
