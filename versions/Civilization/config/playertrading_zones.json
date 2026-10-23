@@ -67,8 +67,8 @@
       "maxX": -1280,
       "maxY": 384,
       "maxZ": 980,
-      "isProtected": false,
-      "pvpDisabled": false
+      "isProtected": true,
+      "pvpDisabled": true
     },
     {
       "id": "hell_island",
