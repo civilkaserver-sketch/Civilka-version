@@ -184,6 +184,24 @@
       "pvpDisabled": true
     },
     {
+      "id": "korolevstvo_absurda",
+      "title": "Королевство Абсурда",
+      "subtitle": "",
+      "dimension": "minecraft:overworld",
+      "minX": -2100,
+      "minY": -64,
+      "minZ": -136,
+      "maxX": -1980,
+      "maxY": 320,
+      "maxZ": -16,
+      "isProtected": true,
+      "pvpDisabled": false,
+      "owner": "IMPERATOR_MIDASS, IMPERATOR_MIDAS",
+      "coreX": -2040,
+      "coreY": 64,
+      "coreZ": -76
+    },
+    {
       "id": "imperator_midass_base",
       "title": "Україна",
       "subtitle": "",
