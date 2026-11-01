@@ -289,7 +289,7 @@
       "maxZ": -179,
       "isProtected": true,
       "pvpDisabled": false,
-      "denyMobSpawn": true,
+      "denyMobSpawn": false,
       "owner": "gugomot"
     },
     {
