@@ -19,15 +19,19 @@
       "title": "Вайбкодерское Княжество",
       "subtitle": "",
       "dimension": "minecraft:overworld",
-      "minX": -1274,
+      "minX": -1372,
       "minY": -64,
-      "minZ": -352,
-      "maxX": -1132,
+      "minZ": -360,
+      "maxX": -1066,
       "maxY": 320,
-      "maxZ": -193,
+      "maxZ": -147,
       "isProtected": true,
       "pvpDisabled": false,
-      "owner": "gugomot"
+      "denyMobSpawn": true,
+      "owner": "gugomot",
+      "coreX": -1224,
+      "coreY": 76,
+      "coreZ": -293
     },
     {
       "id": "tavern",
@@ -217,21 +221,6 @@
       "owner": "IMPERATOR_MIDASS, IMPERATOR_MIDAS"
     },
     {
-      "id": "syn_mijaghi_base",
-      "title": "Калинівка",
-      "subtitle": "",
-      "dimension": "minecraft:overworld",
-      "minX": -648,
-      "minY": -64,
-      "minZ": -211,
-      "maxX": -580,
-      "maxY": 320,
-      "maxZ": -116,
-      "isProtected": true,
-      "pvpDisabled": false,
-      "owner": "syn_mijaghi"
-    },
-    {
       "id": "batton_base",
       "title": "Заморская держава",
       "subtitle": "",
@@ -310,7 +299,7 @@
     {
       "id": "end_base_gugomot_midas",
       "title": "База Энд",
-      "subtitle": "Україна & Центр",
+      "subtitle": "Україна \u0026 Центр",
       "dimension": "minecraft:the_end",
       "minX": -80,
       "minY": -64,
@@ -336,7 +325,10 @@
       "maxZ": -25,
       "isProtected": true,
       "pvpDisabled": false,
-      "owner": "wwzmx"
+      "owner": "wwzmx",
+      "coreX": -1488,
+      "coreY": 74,
+      "coreZ": -123
     },
     {
       "id": "imperator_midass_base_2",
@@ -382,6 +374,123 @@
       "isProtected": true,
       "pvpDisabled": false,
       "owner": "IMPERATOR_MIDASS, IMPERATOR_MIDAS"
+    },
+    {
+      "id": "syn_mijaghi_base",
+      "title": "Калинівка",
+      "subtitle": "",
+      "dimension": "minecraft:overworld",
+      "minX": -648,
+      "minY": -64,
+      "minZ": -211,
+      "maxX": -580,
+      "maxY": 320,
+      "maxZ": -116,
+      "isProtected": true,
+      "pvpDisabled": false,
+      "owner": "syn_mijaghi",
+      "frontline": [
+        {
+          "x": -638,
+          "y": 110,
+          "z": -163
+        },
+        {
+          "x": -638,
+          "y": 110,
+          "z": -164
+        },
+        {
+          "x": -637,
+          "y": 110,
+          "z": -165
+        },
+        {
+          "x": -637,
+          "y": 110,
+          "z": -166
+        },
+        {
+          "x": -637,
+          "y": 110,
+          "z": -166
+        },
+        {
+          "x": -637,
+          "y": 110,
+          "z": -167
+        },
+        {
+          "x": -637,
+          "y": 110,
+          "z": -168
+        },
+        {
+          "x": -636,
+          "y": 110,
+          "z": -169
+        },
+        {
+          "x": -636,
+          "y": 110,
+          "z": -170
+        },
+        {
+          "x": -636,
+          "y": 110,
+          "z": -171
+        },
+        {
+          "x": -635,
+          "y": 110,
+          "z": -171
+        },
+        {
+          "x": -634,
+          "y": 110,
+          "z": -172
+        },
+        {
+          "x": -634,
+          "y": 110,
+          "z": -173
+        },
+        {
+          "x": -633,
+          "y": 110,
+          "z": -174
+        },
+        {
+          "x": -633,
+          "y": 110,
+          "z": -176
+        },
+        {
+          "x": -631,
+          "y": 109,
+          "z": -175
+        },
+        {
+          "x": -629,
+          "y": 109,
+          "z": -176
+        },
+        {
+          "x": -626,
+          "y": 108,
+          "z": -178
+        },
+        {
+          "x": -624,
+          "y": 107,
+          "z": -180
+        },
+        {
+          "x": -624,
+          "y": 107,
+          "z": -180
+        }
+      ]
     }
   ]
 }
