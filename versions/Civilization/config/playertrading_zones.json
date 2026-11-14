@@ -1,3 +1,58 @@
 {
-  "zones": []
+  "zones": [
+    {
+      "id": "base_wlimon4ik",
+      "title": "База wlimon4ik",
+      "subtitle": "Приват",
+      "dimension": "minecraft:overworld",
+      "minX": -10123,
+      "minY": -64,
+      "minZ": -17848,
+      "maxX": -9923,
+      "maxY": 320,
+      "maxZ": -17648,
+      "isProtected": true,
+      "pvpDisabled": true,
+      "owner": "wlimon4ik",
+      "coreX": -10023,
+      "coreY": 80,
+      "coreZ": -17748
+    },
+    {
+      "id": "base_gugomot",
+      "title": "База gugomot",
+      "subtitle": "Приват",
+      "dimension": "minecraft:overworld",
+      "minX": 153,
+      "minY": -64,
+      "minZ": -418,
+      "maxX": 273,
+      "maxY": 320,
+      "maxZ": -298,
+      "isProtected": true,
+      "pvpDisabled": true,
+      "owner": "gugomot",
+      "coreX": 213,
+      "coreY": 80,
+      "coreZ": -358
+    },
+    {
+      "id": "base_imperator_midass",
+      "title": "База IMPERATOR_MIDASS",
+      "subtitle": "Приват",
+      "dimension": "minecraft:overworld",
+      "minX": -2091,
+      "minY": -64,
+      "minZ": -20413,
+      "maxX": -1891,
+      "maxY": 320,
+      "maxZ": -20213,
+      "isProtected": true,
+      "pvpDisabled": true,
+      "owner": "IMPERATOR_MIDASS",
+      "coreX": -1991,
+      "coreY": 67,
+      "coreZ": -20313
+    }
+  ]
 }
