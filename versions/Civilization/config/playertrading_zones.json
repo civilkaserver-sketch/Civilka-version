@@ -32,9 +32,11 @@
       "isProtected": true,
       "pvpDisabled": true,
       "owner": "gugomot",
-      "coreX": 213,
-      "coreY": 80,
-      "coreZ": -358
+      "coreX": 214.43,
+      "coreY": 138.00,
+      "coreZ": -357.69,
+      "coreYaw": -565.32,
+      "corePitch": 17.40
     },
     {
       "id": "base_imperator_midass",
