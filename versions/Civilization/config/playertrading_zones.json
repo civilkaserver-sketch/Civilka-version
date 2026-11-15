@@ -43,18 +43,20 @@
       "title": "База IMPERATOR_MIDASS",
       "subtitle": "Приват",
       "dimension": "minecraft:overworld",
-      "minX": -2091,
+      "minX": -2280,
       "minY": -64,
-      "minZ": -20413,
-      "maxX": -1891,
+      "minZ": -20301,
+      "maxX": -2220,
       "maxY": 320,
-      "maxZ": -20213,
+      "maxZ": -20241,
       "isProtected": true,
       "pvpDisabled": true,
-      "owner": "IMPERATOR_MIDASS",
-      "coreX": -1991,
-      "coreY": 67,
-      "coreZ": -20313
+      "owner": "IMPERATOR_MIDASS, midas",
+      "coreX": -2249.59,
+      "coreY": 112.00,
+      "coreZ": -20271.47,
+      "coreYaw": -1002.72,
+      "corePitch": 58.95
     }
   ]
 }
